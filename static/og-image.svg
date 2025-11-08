@@ -1,0 +1,26 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0f1117"/>
+  <rect x="40" y="40" width="1120" height="550" rx="40" fill="url(#gradient)" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+  <text x="120" y="220" fill="#E5E7EB" font-family="Space Grotesk, Inter, system-ui" font-size="64" font-weight="600">
+    Fran — Secure by Design
+  </text>
+  <text x="120" y="300" fill="#9CA3AF" font-family="Space Grotesk, Inter, system-ui" font-size="36">
+    Portfolio · Ciberseguridad · Criptografía aplicada
+  </text>
+  <text x="120" y="380" fill="#06B6D4" font-family="Space Grotesk, Inter, system-ui" font-size="32">
+    SvelteKit · Rust · Python · IA para seguridad
+  </text>
+  <circle cx="920" cy="310" r="180" fill="url(#pulse)" opacity="0.7"/>
+  <circle cx="920" cy="310" r="70" stroke="#06B6D4" stroke-width="6" opacity="0.8"/>
+  <circle cx="920" cy="310" r="110" stroke="#7C3AED" stroke-width="6" opacity="0.6"/>
+  <defs>
+    <linearGradient id="gradient" x1="40" y1="40" x2="1180" y2="590" gradientUnits="userSpaceOnUse">
+      <stop stop-color="rgba(6,182,212,0.35)"/>
+      <stop offset="1" stop-color="rgba(124,58,237,0.35)"/>
+    </linearGradient>
+    <radialGradient id="pulse" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(920 310) rotate(90) scale(180)">
+      <stop stop-color="#7C3AED" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#0f1117" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

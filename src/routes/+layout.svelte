@@ -1,0 +1,29 @@
+<script lang="ts">
+	import '../app.css';
+	import Layout from '$lib/components/Layout.svelte';
+	import favicon from '$lib/assets/favicon.svg';
+	import { siteMetadata } from '$lib/data/profile';
+
+	let { children } = $props();
+</script>
+
+<svelte:head>
+	<title>{siteMetadata.title}</title>
+	<link rel="icon" type="image/svg+xml" href={favicon} />
+	<link rel="canonical" href={siteMetadata.url} />
+	<meta name="description" content={siteMetadata.description} />
+	<meta name="keywords" content={siteMetadata.keywords.join(', ')} />
+	<meta name="author" content={siteMetadata.name} />
+	<meta property="og:title" content={siteMetadata.title} />
+	<meta property="og:description" content={siteMetadata.description} />
+	<meta property="og:image" content={siteMetadata.image} />
+	<meta property="og:type" content="website" />
+	<meta property="og:locale" content="es_ES" />
+	<meta property="og:url" content={siteMetadata.url} />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={siteMetadata.title} />
+	<meta name="twitter:description" content={siteMetadata.description} />
+	<meta name="twitter:image" content={siteMetadata.image} />
+</svelte:head>
+
+<Layout>{@render children?.()}</Layout>
