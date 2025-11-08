@@ -3,8 +3,13 @@
 	import Layout from '$lib/components/Layout.svelte';
 	import favicon from '$lib/assets/favicon.svg';
 	import { siteMetadata } from '$lib/data/profile';
+	import { base } from '$app/paths';
 
 	let { children } = $props();
+
+	const ogImage = siteMetadata.image.startsWith('http')
+		? siteMetadata.image
+		: `${base}${siteMetadata.image}`;
 </script>
 
 <svelte:head>
@@ -16,14 +21,14 @@
 	<meta name="author" content={siteMetadata.name} />
 	<meta property="og:title" content={siteMetadata.title} />
 	<meta property="og:description" content={siteMetadata.description} />
-	<meta property="og:image" content={siteMetadata.image} />
+	<meta property="og:image" content={ogImage} />
 	<meta property="og:type" content="website" />
 	<meta property="og:locale" content="es_ES" />
 	<meta property="og:url" content={siteMetadata.url} />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={siteMetadata.title} />
 	<meta name="twitter:description" content={siteMetadata.description} />
-	<meta name="twitter:image" content={siteMetadata.image} />
+	<meta name="twitter:image" content={ogImage} />
 </svelte:head>
 
 <Layout>{@render children?.()}</Layout>

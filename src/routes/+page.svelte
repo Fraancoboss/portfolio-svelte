@@ -6,6 +6,7 @@
 	import pentesting from '$lib/assets/sbd.png';
 	import aiSecurity from '$lib/assets/ia-ciberseguridad.png';
 	import cryptoImage from '$lib/assets/criptografia.png';
+	import { base } from '$app/paths';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -75,6 +76,7 @@
 		}
 	];
 	const tickerValues = data.hero.values.map((value) => `-- ${value} --`).join(' ');
+	const withBase = (path: string) => (path.startsWith('http') ? path : `${base}${path}`);
 </script>
 
 <section class="grid gap-12 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
@@ -101,13 +103,13 @@
 		<div class="flex flex-wrap gap-4">
 			<a
 				class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-6 py-3 font-semibold text-surface shadow-lg transition hover:shadow-primary/40"
-				href={data.hero.ctaPrimary.href}
+				href={withBase(data.hero.ctaPrimary.href)}
 			>
 				{data.hero.ctaPrimary.label}
 			</a>
 			<a
 				class="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 font-semibold text-slate-200 hover:border-primary/70"
-				href={data.hero.ctaSecondary.href}
+				href={withBase(data.hero.ctaSecondary.href)}
 			>
 				{data.hero.ctaSecondary.label}
 			</a>
@@ -250,7 +252,7 @@
 			title="Arquitecturas diseñadas con mentalidad defensiva"
 			description="Desde detección de amenazas en tiempo real hasta protocolos cifrados para redes distribuidas."
 		/>
-		<a class="text-sm text-primary hover:text-secondary" href="/projects">Ver todos los proyectos →</a>
+		<a class="text-sm text-primary hover:text-secondary" href={withBase('/projects')}>Ver todos los proyectos →</a>
 	</div>
 	<div class="mt-10 grid gap-8 lg:grid-cols-2">
 		{#each data.spotlightProjects as project}

@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { navigation, siteMetadata, socialLinks } from '$lib/data/profile';
+	import { base } from '$app/paths';
 
 	const year = new Date().getFullYear();
+	const resolveHref = (href: string) => (href.startsWith('http') ? href : `${base}${href}`);
 </script>
 
 <footer class="border-t border-border/80 bg-surface/80">
@@ -31,7 +33,7 @@
 				<ul class="mt-3 space-y-2 text-slate-400">
 					{#each navigation as item}
 						<li>
-							<a href={item.href} class="hover:text-white">{item.label}</a>
+							<a href={resolveHref(item.href)} class="hover:text-white">{item.label}</a>
 						</li>
 					{/each}
 				</ul>

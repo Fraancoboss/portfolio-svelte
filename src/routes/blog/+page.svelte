@@ -1,8 +1,10 @@
 <script lang="ts">
 	import SectionTitle from '$lib/components/SectionTitle.svelte';
+	import { base } from '$app/paths';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
+	const withBase = (path: string) => `${base}${path}`;
 </script>
 
 <svelte:head>
@@ -24,7 +26,7 @@
 		{#each data.featuredPosts as post}
 			<a
 				class="rounded-3xl border border-border/70 bg-surface/60 p-6 transition hover:-translate-y-1 hover:border-primary/70"
-				href={`/blog/${post.slug}`}
+				href={withBase(`/blog/${post.slug}`)}
 			>
 				<p class="text-xs uppercase tracking-[0.3em] text-secondary">{post.category}</p>
 				<h3 class="mt-3 text-2xl font-semibold text-slate-50">{post.title}</h3>
@@ -44,7 +46,7 @@
 	<div class="mt-16 space-y-6">
 		{#each data.articles as article}
 			<a
-				href={`/blog/${article.slug}`}
+				href={withBase(`/blog/${article.slug}`)}
 				class="flex flex-col gap-4 rounded-2xl border border-border/70 bg-surface/70 p-6 transition hover:border-primary/60 hover:text-primary sm:flex-row sm:items-center sm:justify-between"
 			>
 				<div>

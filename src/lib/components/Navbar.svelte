@@ -1,16 +1,23 @@
 <script lang="ts">
 	import { navigation } from '$lib/data/profile';
 	import { page } from '$app/stores';
+	import { base } from '$app/paths';
 
 	let isMenuOpen = false;
 	$: pathname = $page.url.pathname;
 
-	const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
+	const resolveHref = (href: string) => (href.startsWith('http') ? href : `${base}${href}`);
+	const isActive = (href: string) => {
+		const target = resolveHref(href);
+		return target === base || target === `${base}/`
+			? pathname === `${base}/` || pathname === base
+			: pathname.startsWith(target);
+	};
 </script>
 
 <header class="sticky top-0 z-30 border-b border-border/70 bg-surface/80 backdrop-blur-lg">
 	<div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-		<a class="flex items-center gap-2 text-lg font-semibold tracking-tight" href="/">
+		<a class="flex items-center gap-2 text-lg font-semibold tracking-tight" href={resolveHref('/')}>
 			<span class="uppercase tracking-[0.3em] text-transparent bg-gradient-to-r from-red-500 via-rose-500 to-red-600 bg-clip-text">
 				FRAN COBOS RODRÍGUEZ
 			</span>
@@ -19,7 +26,7 @@
 		<nav class="hidden items-center gap-6 text-sm font-medium md:flex">
 			{#each navigation as link}
 				<a
-					href={link.href}
+					href={resolveHref(link.href)}
 					aria-current={isActive(link.href) ? 'page' : undefined}
 					class={`relative inline-flex flex-col items-start gap-1 text-sm transition ${
 						isActive(link.href) ? 'text-primary' : 'text-slate-300 hover:text-white'
@@ -33,7 +40,7 @@
 				</a>
 			{/each}
 			<a
-				href="/contact"
+				href={resolveHref('/contact')}
 				class="inline-flex items-center gap-2 rounded-full border border-primary/40 px-4 py-1.5 text-xs uppercase tracking-widest text-primary transition hover:-translate-y-0.5 hover:border-primary/80 hover:text-white"
 			>
 				<span>Contacto</span>
@@ -64,7 +71,7 @@
 			<nav class="flex flex-col gap-4">
 				{#each navigation as link}
 					<a
-						href={link.href}
+						href={resolveHref(link.href)}
 						class={`flex flex-col gap-1 rounded-lg border px-4 py-3 ${
 							isActive(link.href)
 								? 'border-primary/50 text-primary'
