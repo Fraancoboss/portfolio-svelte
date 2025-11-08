@@ -22,4 +22,4 @@ El ownership model evita fugas de memoria y me permite escribir bindings seguros
 
 ### Validación
 
-Automatizo pruebas diferenciales con `cargo nextest` y utilizo `criterion` para perf. El resultado: latencia adicional < 5ms en dispositivos ARM.
+Automatizo pruebas diferenciales con `cargo nextest` y utilizo `criterion` para perf. El resultado: latencia adicional &lt; 5ms en dispositivos ARM.
