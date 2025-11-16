@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		
+		<link rel="modulepreload" href="/portfolio-svelte/_app/immutable/entry/start.C2rYoCAz.js">
+		<link rel="modulepreload" href="/portfolio-svelte/_app/immutable/chunks/1Z_Ip50h.js">
+		<link rel="modulepreload" href="/portfolio-svelte/_app/immutable/chunks/AQeiAKmB.js">
+		<link rel="modulepreload" href="/portfolio-svelte/_app/immutable/chunks/Bg98CmJG.js">
+		<link rel="modulepreload" href="/portfolio-svelte/_app/immutable/chunks/B-j4lcbj.js">
+		<link rel="modulepreload" href="/portfolio-svelte/_app/immutable/entry/app.l2uvBqu1.js">
+		<link rel="modulepreload" href="/portfolio-svelte/_app/immutable/chunks/3d60cURz.js">
+		<link rel="modulepreload" href="/portfolio-svelte/_app/immutable/chunks/CV77ZnmW.js">
+		<link rel="modulepreload" href="/portfolio-svelte/_app/immutable/chunks/C2CKcVSt.js">
+		<link rel="modulepreload" href="/portfolio-svelte/_app/immutable/chunks/DCQWhWVE.js">
+		<link rel="modulepreload" href="/portfolio-svelte/_app/env.js">
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">
+			<script>
+				{
+					__sveltekit_1e8lh8d = {
+						base: "/portfolio-svelte",
+						assets: "/portfolio-svelte",
+						env: null
+					};
+
+					const element = document.currentScript.parentElement;
+
+					import("/portfolio-svelte/_app/env.js").then(({ env }) => {
+						__sveltekit_1e8lh8d.env = env;
+
+						Promise.all([
+							import("/portfolio-svelte/_app/immutable/entry/start.C2rYoCAz.js"),
+							import("/portfolio-svelte/_app/immutable/entry/app.l2uvBqu1.js")
+						]).then(([kit, app]) => {
+							kit.start(app, element);
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>
