@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { siteMetadata } from '$lib/data/profile';
+	import { profileContent } from '$lib/data/profile';
 	import type { Snippet } from 'svelte';
 
 	type PostMetadata = {
@@ -12,14 +12,17 @@
 	};
 
 let { metadata = {}, children }: { metadata?: PostMetadata; children?: Snippet } = $props();
+
+// Decisión: los posts se renderizan con los metadatos de profileContent.es para mantener consistencia.
+const content = profileContent.es;
 </script>
 
 <svelte:head>
 	{#if metadata?.title}
-		<title>{metadata.title} · {siteMetadata.name}</title>
-		<meta name="description" content={metadata.excerpt ?? siteMetadata.description} />
-		<meta property="og:title" content={`${metadata.title} · ${siteMetadata.name}`} />
-		<meta property="og:description" content={metadata.excerpt ?? siteMetadata.description} />
+		<title>{metadata.title} · {content.siteMetadata.name}</title>
+		<meta name="description" content={metadata.excerpt ?? content.siteMetadata.description} />
+		<meta property="og:title" content={`${metadata.title} · ${content.siteMetadata.name}`} />
+		<meta property="og:description" content={metadata.excerpt ?? content.siteMetadata.description} />
 	{/if}
 </svelte:head>
 
@@ -28,7 +31,7 @@ let { metadata = {}, children }: { metadata?: PostMetadata; children?: Snippet }
 		<p class="text-xs uppercase tracking-[0.3em] text-primary/70">{metadata.category}</p>
 		<h1 class="text-4xl font-semibold text-slate-50">{metadata.title}</h1>
 		<p class="text-sm text-slate-400">
-			Publicado el {metadata.publishedAt} · {metadata.readingTime}
+			{profileContent.es.blogPage.postMetaPrefix} {metadata.publishedAt} · {metadata.readingTime}
 		</p>
 	</header>
 	{@render children?.()}

@@ -2,28 +2,30 @@
 	import SectionTitle from '$lib/components/SectionTitle.svelte';
 	import { base } from '$app/paths';
 	import type { PageData } from './$types';
+	import { profileContent } from '$lib/data/profile';
 
+	// Decisión: fijamos la fuente de datos en profileContent.es para mantener
+	// coherencia con el resto del sitio estático.
 	let { data }: { data: PageData } = $props();
 	const withBase = (path: string) => `${base}${path}`;
+	const blogPage = profileContent.es.blogPage;
+	const featuredPosts = profileContent.es.featuredPosts;
 </script>
 
 <svelte:head>
-	<title>Divulgación y blog · Fran</title>
-	<meta
-		name="description"
-		content="Artículos técnicos sobre ciberseguridad, criptografía aplicada y diseño Secure by Design."
-	/>
+	<title>{blogPage.headTitle}</title>
+	<meta name="description" content={blogPage.headDescription} />
 </svelte:head>
 
 <section class="py-12">
 	<SectionTitle
-		eyebrow="Divulgación"
-		title="Ideas, guías y estudios sobre seguridad avanzada"
-		description="Contenido listo para convertirse en mdsvex y conectado con tus proyectos."
+		eyebrow={blogPage.section.eyebrow}
+		title={blogPage.section.title}
+		description={blogPage.section.description}
 	/>
 
 	<div class="mt-10 grid gap-6 lg:grid-cols-3">
-		{#each data.featuredPosts as post}
+		{#each featuredPosts as post}
 			<a
 				class="rounded-3xl border border-border/70 bg-surface/60 p-6 transition hover:-translate-y-1 hover:border-primary/70"
 				href={withBase(`/blog/${post.slug}`)}
@@ -60,7 +62,7 @@
 				</div>
 			</a>
 		{:else}
-			<p class="text-slate-400">Pronto habrá publicaciones en formato markdown usando mdsvex.</p>
+			<p class="text-slate-400">{blogPage.emptyState}</p>
 		{/each}
 	</div>
 </section>

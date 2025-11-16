@@ -8,7 +8,7 @@
 	let { children } = $props();
 </script>
 
-<div class="relative min-h-screen overflow-hidden bg-surface text-slate-100">
+<div class="relative min-h-screen overflow-hidden bg-surface text-body">
 	<div class="pointer-events-none absolute inset-0 opacity-60">
 		<div class="absolute -left-32 top-0 h-96 w-96 rounded-full bg-primary/10 blur-[140px]"></div>
 		<div class="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-secondary/10 blur-[180px]"></div>

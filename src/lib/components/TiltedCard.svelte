@@ -16,6 +16,7 @@
 		displayOverlayContent?: boolean;
 		overlayTitle?: string;
 		overlayDescription?: string;
+		imageFilter?: string;
 	};
 
 	let {
@@ -32,7 +33,8 @@
 		showTooltip = true,
 		displayOverlayContent = false,
 		overlayTitle = '',
-		overlayDescription = ''
+		overlayDescription = '',
+		imageFilter = ''
 	}: Props = $props();
 let container: HTMLElement | null = null;
 let pointerXValue = $state(0);
@@ -46,6 +48,7 @@ let pointerYValue = $state(0);
 let tooltipOpacityValue = $state(0);
 let rotateCaptionValue = $state(0);
 let lastY = 0;
+let isHovering = $state(false);
 
 	function handleMouse(event: MouseEvent) {
 		if (!container) return;
@@ -72,6 +75,7 @@ let lastY = 0;
 		scaleValue = Math.max(scaleOnHover, 1.12);
 		liftValue = 60;
 		tooltipOpacityValue = 1;
+		isHovering = true;
 	}
 
 	function handleLeave() {
@@ -83,6 +87,7 @@ let lastY = 0;
 		rotateXValue = 0;
 		rotateYValue = 0;
 		rotateCaptionValue = 0;
+		isHovering = false;
 	}
 
 	const overlayVisible = displayOverlayContent && (overlayTitle || overlayDescription);
@@ -110,12 +115,17 @@ let lastY = 0;
 			src={imageSrc}
 			alt={altText}
 			class="absolute left-0 top-0 rounded-[15px] object-cover shadow-2xl will-change-transform [transform:translateZ(0)]"
-			style={`width:${imageWidth};height:${imageHeight};`}
+			style={`width:${imageWidth};height:${imageHeight};${imageFilter ? `filter:${imageFilter};` : ''}`}
 			loading="lazy"
 		/>
 
 		{#if overlayVisible}
-			<div class="absolute left-0 top-0 z-[2] space-y-1 rounded-2xl border border-border/60 bg-surface/80 p-4 text-sm text-slate-200 [transform:translateZ(35px)]">
+			<div
+				class={`pointer-events-none absolute left-0 top-0 z-[2] space-y-1 rounded-2xl border border-border/60 bg-surface/80 p-4 text-sm text-body transition-all duration-300 ease-out will-change-transform ${
+					isHovering ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
+				}`}
+				style="transform:translateZ(35px);"
+			>
 				{#if overlayTitle}
 					<p class="text-sm font-semibold text-primary">{overlayTitle}</p>
 				{/if}

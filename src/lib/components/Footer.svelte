@@ -1,7 +1,13 @@
 <script lang="ts">
-	import { navigation, siteMetadata, socialLinks } from '$lib/data/profile';
 	import { base } from '$app/paths';
+	import { profileContent } from '$lib/data/profile';
 
+	/**
+	 * Decisión: la información del pie se resuelve una sola vez desde profileContent.es
+	 * para dejar claro que el sitio se publica en español fijo y no depende de stores reactivos.
+	 * Esto documenta explícitamente de dónde salen navegación, redes y textos legales.
+	 */
+	const content = profileContent.es;
 	const year = new Date().getFullYear();
 	const resolveHref = (href: string) => (href.startsWith('http') ? href : `${base}${href}`);
 </script>
@@ -9,12 +15,12 @@
 <footer class="border-t border-border/80 bg-surface/80">
 	<div class="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-12 sm:px-6 lg:px-8 lg:flex-row lg:items-start lg:justify-between">
 		<div class="max-w-md space-y-4">
-			<p class="text-lg font-semibold">{siteMetadata.name} · Secure by Design</p>
+			<p class="text-lg font-semibold">{content.siteMetadata.name} · Secure by Design</p>
 			<p class="text-sm text-slate-400">
-				Creo soluciones digitales seguras combinando criptografía aplicada, IA defensiva y diseño centrado en las personas.
+				{content.footer.tagline}
 			</p>
 			<div class="flex flex-wrap gap-3">
-				{#each socialLinks as social}
+				{#each content.socialLinks as social}
 					<a
 						href={social.href}
 						target="_blank"
@@ -29,9 +35,9 @@
 
 		<div class="grid flex-1 grid-cols-1 gap-8 text-sm sm:grid-cols-2">
 			<div>
-				<p class="font-semibold text-slate-200">Mapa del sitio</p>
+				<p class="font-semibold text-body">{content.footer.siteMapTitle}</p>
 				<ul class="mt-3 space-y-2 text-slate-400">
-					{#each navigation as item}
+					{#each content.navigation as item}
 						<li>
 							<a href={resolveHref(item.href)} class="hover:text-white">{item.label}</a>
 						</li>
@@ -39,16 +45,16 @@
 				</ul>
 			</div>
 			<div>
-				<p class="font-semibold text-slate-200">Disponibilidad</p>
+				<p class="font-semibold text-body">{content.footer.availabilityTitle}</p>
 				<ul class="mt-3 space-y-2 text-slate-400">
-					<li>Abierto a prácticas profesionales</li>
-					<li>Colaboraciones en ciberseguridad ofensiva</li>
-					<li>Diseño de frameworks visuales seguros</li>
+					{#each content.footer.availability as item}
+						<li>{item}</li>
+					{/each}
 				</ul>
 			</div>
 		</div>
 	</div>
 	<div class="border-t border-border/80 bg-surface/90 px-4 py-4 text-center text-xs uppercase tracking-[0.2em] text-slate-500 sm:px-6 lg:px-8">
-		© {year} {siteMetadata.name}. Construido con SvelteKit, TypeScript y TailwindCSS.
+		© {year} {content.siteMetadata.name}. {content.footer.signature}
 	</div>
 </footer>

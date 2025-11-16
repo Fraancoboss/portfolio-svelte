@@ -1,19 +1,22 @@
 <script lang="ts">
 	import type { Project } from '$lib/types/content';
+	import { profileContent } from '$lib/data/profile';
 
 	let { project }: { project: Project } = $props();
+	const copy = profileContent.es.projectsPage;
 </script>
 
 <article
-	class="group flex flex-col gap-6 rounded-2xl border border-border/80 bg-surface/60 p-6 text-slate-200 shadow-[0_20px_60px_rgba(0,0,0,0.35)] transition hover:-translate-y-1 hover:border-primary/50 hover:bg-surface/80"
+	class="group flex flex-col gap-6 rounded-2xl border border-border/80 bg-surface/60 p-6 text-body shadow-[0_20px_60px_rgba(0,0,0,0.35)] transition hover:-translate-y-1 hover:border-primary/50 hover:bg-surface/80"
 >
 	<header class="flex flex-wrap items-center justify-between gap-3">
 		<div>
-			<p class="text-sm uppercase tracking-[0.25em] text-secondary/80">Proyecto</p>
+			<p class="text-sm uppercase tracking-[0.25em] text-secondary/80">
+				{copy.projectLabel}
+			</p>
 			<h3 class="text-2xl font-semibold text-slate-50">{project.title}</h3>
 		</div>
 		<div class="flex items-center gap-2 text-xs">
-			<span class="rounded-full border border-primary/40 px-3 py-1 text-primary">{project.status}</span>
 			<span class="rounded-full border border-border px-3 py-1 text-slate-400">{project.year}</span>
 		</div>
 	</header>

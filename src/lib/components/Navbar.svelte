@@ -1,10 +1,21 @@
 <script lang="ts">
-	import { navigation } from '$lib/data/profile';
 	import { page } from '$app/stores';
 	import { base } from '$app/paths';
+	import { profileContent } from '$lib/data/profile';
 
-	let isMenuOpen = false;
-	$: pathname = $page.url.pathname;
+	/**
+	 * Decisión: fijamos todo el contenido en la versión española (profileContent.es)
+	 * para simplificar el despliegue estático en GitHub Pages y evitar dependencias
+	 * con stores globales o sincronización de idioma. Este componente solo necesita
+	 * datos inmutables de navegación y CTA, por lo que mantenerlos en constantes
+	 * reduce la complejidad y deja claro de dónde salen los textos.
+	 */
+	const content = profileContent.es;
+	const navigation = content.navigation;
+	const navbarCopy = content.navbar;
+
+	let isMenuOpen = $state(false);
+	const pathname = $derived($page.url.pathname);
 
 	const resolveHref = (href: string) => (href.startsWith('http') ? href : `${base}${href}`);
 	const isActive = (href: string) => {
@@ -28,12 +39,11 @@
 				<a
 					href={resolveHref(link.href)}
 					aria-current={isActive(link.href) ? 'page' : undefined}
-					class={`relative inline-flex flex-col items-start gap-1 text-sm transition ${
+					class={`relative inline-flex text-sm transition ${
 						isActive(link.href) ? 'text-primary' : 'text-slate-300 hover:text-white'
 					}`}
 				>
 					<span>{link.label}</span>
-					<span class="text-[11px] uppercase tracking-widest text-slate-500">{link.description}</span>
 					{#if isActive(link.href)}
 						<span class="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-primary to-secondary"></span>
 					{/if}
@@ -43,27 +53,29 @@
 				href={resolveHref('/contact')}
 				class="inline-flex items-center gap-2 rounded-full border border-primary/40 px-4 py-1.5 text-xs uppercase tracking-widest text-primary transition hover:-translate-y-0.5 hover:border-primary/80 hover:text-white"
 			>
-				<span>Contacto</span>
+				<span>{navbarCopy.contactCta}</span>
 			</a>
 		</nav>
 
-		<button
-			type="button"
-			class="inline-flex items-center justify-center rounded-md border border-border/80 p-2 text-slate-200 md:hidden"
-			onclick={() => (isMenuOpen = !isMenuOpen)}
-			aria-expanded={isMenuOpen}
-			aria-label="Abrir menú de navegación"
-		>
-			{#if isMenuOpen}
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" fill="none">
-					<path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M6 6l12 12M18 6 6 18" />
-				</svg>
-			{:else}
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" fill="none">
-					<path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M5 7h14M5 12h14M5 17h14" />
-				</svg>
-			{/if}
-		</button>
+		<div class="flex items-center gap-3 md:hidden">
+			<button
+				type="button"
+				class="inline-flex items-center justify-center rounded-md border border-border/80 p-2 text-slate-200"
+				onclick={() => (isMenuOpen = !isMenuOpen)}
+				aria-expanded={isMenuOpen}
+				aria-label={navbarCopy.menuLabel}
+			>
+				{#if isMenuOpen}
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" fill="none">
+						<path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M6 6l12 12M18 6 6 18" />
+					</svg>
+				{:else}
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" fill="none">
+						<path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M5 7h14M5 12h14M5 17h14" />
+					</svg>
+				{/if}
+			</button>
+		</div>
 	</div>
 
 	{#if isMenuOpen}
@@ -80,10 +92,18 @@
 						onclick={() => (isMenuOpen = false)}
 					>
 						<span class="text-base font-semibold">{link.label}</span>
-						<span class="text-xs uppercase tracking-wide text-slate-500">{link.description}</span>
 					</a>
 				{/each}
 			</nav>
+			<div class="mt-4 flex flex-wrap items-center justify-between gap-3">
+				<a
+					href={resolveHref('/contact')}
+					class="inline-flex items-center gap-2 rounded-full border border-primary/40 px-4 py-2 text-xs uppercase tracking-[0.3em] text-primary"
+					onclick={() => (isMenuOpen = false)}
+				>
+					{navbarCopy.contactCta}
+				</a>
+			</div>
 		</div>
 	{/if}
 </header>

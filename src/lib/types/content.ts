@@ -16,13 +16,15 @@ export type Technology = {
 	category: 'language' | 'framework' | 'database' | 'tooling' | 'security' | 'ai';
 };
 
+export type ProjectStatus = 'production' | 'in-progress' | 'prototype';
+
 export type Project = {
 	title: string;
 	slug: string;
 	overview: string;
 	impact: string;
 	tech: string[];
-	status: 'En progreso' | 'En producción' | 'Prototipo';
+	status: ProjectStatus;
 	year: number;
 	cta?: {
 		label: string;
@@ -40,7 +42,7 @@ export type Post = {
 	title: string;
 	slug: string;
 	excerpt: string;
-	category: 'Ciberseguridad' | 'Criptografía' | 'Secure by Design' | 'IA aplicada';
+	category: string;
 	publishedAt: string;
 	readingTime: string;
 	tags: string[];

@@ -12,7 +12,8 @@ const config = {
 			pages: 'build',
 			assets: 'build',
 			fallback: undefined,
-			precompress: false
+			precompress: false,
+			strict: false // permitimos rutas detectadas como “dinámicas”
 		}),
 		paths: {
 			base: process.env.NODE_ENV === 'production' ? '/portfolio-svelte' : ''
@@ -21,3 +22,4 @@ const config = {
 };
 
 export default config;
+

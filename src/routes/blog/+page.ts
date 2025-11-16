@@ -1,4 +1,3 @@
-import { featuredPosts } from '$lib/data/posts';
 import { sanitizeInput } from '$lib/security/validation';
 import type { PageLoad } from './$types';
 
@@ -52,7 +51,6 @@ export const load = (() => {
 	articles.sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1));
 
 	return {
-		featuredPosts: featuredPosts.map((post) => sanitizePost(post)),
 		articles
 	};
 }) satisfies PageLoad;
