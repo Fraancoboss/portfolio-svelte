@@ -1,4 +1,3 @@
-import { env } from '$env/dynamic/public';
 import type {
 	ContactChannel,
 	NavigationLink,
@@ -9,8 +8,6 @@ import type {
 	Technology,
 	TimelineItem
 } from '$lib/types/content';
-
-export type Language = 'es' | 'en';
 
 type CTA = {
 	label: string;
@@ -84,27 +81,27 @@ type ProjectsPageCopy = {
 	projectLabel: string;
 };
 
+type ContactExperienceHighlight = {
+	description: string;
+	metric?: string;
+};
+
+type ContactExperience = {
+	role: string;
+	company: string;
+	period: string;
+	highlights: ContactExperienceHighlight[];
+};
+
 type ContactPageCopy = {
 	headTitle: string;
 	headDescription: string;
 	section: SectionCopy;
-	networksLabel: string;
-	directContactLabel: string;
-	directEmail: string;
-	directStatusText: string;
-	groupedHighlights: {
-		title: string;
-		description: string;
-	}[];
-	formTitle: string;
-	nameLabel: string;
-	emailLabel: string;
-	topicLabel: string;
-	topics: { value: string; label: string }[];
-	messageLabel: string;
-	consentCopy: string;
-	submitLabel: string;
-	disabledNotice: string;
+	experienceEyebrow: string;
+	experiences: ContactExperience[];
+	softSkillsTitle: string;
+	softSkillsSubtitle: string;
+	softSkills: string[];
 };
 
 type BlogPageCopy = {
@@ -125,7 +122,6 @@ type FooterCopy = {
 
 type NavbarCopy = {
 	contactCta: string;
-	languageSwitchLabel: string;
 	menuLabel: string;
 };
 
@@ -136,7 +132,7 @@ type SiteMetadata = {
 	keywords: string[];
 	url: string;
 	image: string;
-	language: 'es' | 'en';
+	language: 'es';
 };
 
 type ProfileContent = {
@@ -159,12 +155,7 @@ type ProfileContent = {
 	featuredPosts: Post[];
 };
 
-export const defaultLanguage: Language = 'es';
-
-const contactEmail = env.PUBLIC_CONTACT_EMAIL || 'hola@fran.dev';
-
-export const profileContent: Record<Language, ProfileContent> = {
-	es: {
+export const profileContent: ProfileContent = {
 		siteMetadata: {
 			name: 'Fran',
 			title: 'Fran · Secure by Design Engineer',
@@ -185,7 +176,7 @@ export const profileContent: Record<Language, ProfileContent> = {
 		navigation: [
 			{ label: 'Inicio', href: '/', description: 'Perfil y propuesta de valor' },
 			{ label: 'Proyectos', href: '/projects', description: 'Casos técnicos y stack' },
-			{ label: 'Contacto', href: '/contact', description: 'Mentorías y colaboraciones' }
+			{ label: 'Sobre mí', href: '/contact', description: 'Experiencia y habilidades' }
 		],
 		hero: {
 			role: 'Secure by Design Engineer · AI & Rust enthusiast',
@@ -198,7 +189,7 @@ export const profileContent: Record<Language, ProfileContent> = {
 			},
 			ctaSecondary: {
 				label: 'Contactar',
-				href: '/contact'
+				href: '/contacto'
 			},
 			values: [
 				'Seguridad de transferencia',
@@ -257,10 +248,10 @@ export const profileContent: Record<Language, ProfileContent> = {
 		],
 		contactChannels: [
 			{
-				label: 'Correo',
-				value: contactEmail,
-				subtitle: 'Respuesta en menos de 24h',
-				href: `mailto:${contactEmail}`
+				label: 'LinkedIn',
+				value: 'linkedin.com/in/fran-cobos-rodriguez',
+				subtitle: 'Oportunidades profesionales',
+				href: 'https://www.linkedin.com/in/fran-cobos-rodriguez'
 			},
 			{
 				label: 'GitHub',
@@ -269,10 +260,11 @@ export const profileContent: Record<Language, ProfileContent> = {
 				href: 'https://github.com/Fraancoboss'
 			},
 			{
-				label: 'LinkedIn',
-				value: 'linkedin.com/in/fran-cobos-rodriguez',
-				subtitle: 'Oportunidades profesionales',
-				href: 'https://www.linkedin.com/in/fran-cobos-rodriguez'
+				label: 'Correo',
+				value: 'fraancoboss@gmail.com',
+				subtitle: 'Respuesta en menos de 24h',
+				href: 'mailto:fraancoboss@gmail.com',
+				fullWidth: true
 			}
 		],
 		favoriteTools: [
@@ -399,7 +391,7 @@ export const profileContent: Record<Language, ProfileContent> = {
 			section: {
 				eyebrow: 'Proyectos',
 				title: 'Soluciones diseñadas con mentalidad defensiva',
-				description: 'Del prototipo a producción: documentación, threat modeling y despliegues reproducibles.'
+				description: ''
 			},
 			filters: [
 				{ id: 'all', label: 'Todo' },
@@ -416,49 +408,60 @@ export const profileContent: Record<Language, ProfileContent> = {
 			projectLabel: 'Proyecto'
 		},
 		contactPage: {
-			headTitle: 'Contacto · Fran',
+			headTitle: 'Sobre mí · Fran',
 			headDescription:
-				'Reserva una mentoría, solicita una auditoría o colabora en proyectos Secure by Design.',
+				'Experiencia laboral aplicada con métricas reales y mentalidad blue team enfocada a resultados.',
 			section: {
-				eyebrow: 'Contacto',
-				title: 'Hablemos sobre seguridad, diseño o divulgación',
-				description: 'Respondo en menos de 24h.'
+				eyebrow: 'Sobre mí',
+				title: 'Experiencia laboral',
+				description:
+					'Roles reales donde combiné soporte técnico, desarrollo a medida e IA para acelerar equipos y procesos.'
 			},
-			networksLabel: 'Redes',
-			directContactLabel: 'Contacto directo',
-			directEmail: 'fraancoboss@gmail.com',
-			directStatusText: 'Actualmente en búsqueda activa de prácticas en el sector de la programación.',
-			groupedHighlights: [
+			experienceEyebrow: 'Experiencia laboral',
+			experiences: [
 				{
-					title: 'Disponibilidad',
-					description:
-						'Busco prácticas donde aplicar ciberseguridad, IA y desarrollo seguro, aportando documentación sólida, threat modeling detallado y automatización de pruebas en equipos que valoren la mejora continua.'
+					role: 'Técnico informático · Prácticas SMR',
+					company: 'Tigestion',
+					period: '20/03/2024 – 21/06/2024',
+					highlights: [
+						{ description: 'Reducción del tiempo por incidencia', metric: '35%' },
+						{ description: 'Miembro clave en el desarrollo de webs personalizadas' }
+					]
 				},
 				{
-					title: 'Enfoque técnico',
-					description:
-						'Cursar DAM y SMR me dio una base sólida en sistemas y redes. En Tigestion desplegué infraestructuras y resolví incidencias in situ, lo que consolidó mi criterio operativo a nivel de sistemas.'
+					role: 'Desarrollo en gestión empresarial',
+					company: 'FranService',
+					period: '25/04/2025 – 21/09/2025',
+					highlights: [
+						{ description: 'Desarrollo móvil en iOS y escritorio para ERP', metric: '+40% productividad' },
+						{
+							description: 'Digitalización de partes de trabajo e IA para agilizar procesos empresariales'
+						}
+					]
 				},
-				{
-					title: 'Reputación',
-					description:
-						'Me involucro en comunidades, comparto aprendizajes y mantengo repositorios ordenados, buscando siempre elevar la confianza al colaborar.'
+					{
+						role: 'E-commerce y desarrollo de página web',
+					company: 'Recotex',
+					period: '19/03/2025 – 21/07/2025',
+					highlights: [
+						{ description: 'Gestión de redes sociales con IA', metric: '+25% pedidos' },
+						{
+							description: 'Implementación web a producción y sistema de personalización',
+							metric: '+30% producción'
+						}
+					]
 				}
 			],
-			formTitle: 'Contáctame ahora',
-			nameLabel: 'Nombre completo',
-			emailLabel: 'Email profesional',
-			topicLabel: 'Tema',
-			topics: [
-				{ value: 'informacion', label: 'Información sobre mí' },
-				{ value: 'interes', label: 'Interés laboral' },
-				{ value: 'colaboracion', label: 'Colaboración creativa' }
-			],
-			messageLabel: 'Mensaje',
-			consentCopy: 'Acepto recibir una respuesta con recomendaciones técnicas.',
-			submitLabel: 'Enviar solicitud',
-			disabledNotice:
-				'Configura `PUBLIC_CONTACT_ENDPOINT` para activar el envío (Formspree, Getform, Basin, etc.).'
+			softSkillsTitle: 'Habilidades blandas',
+			softSkillsSubtitle: 'Mentalidad que refuerza mis entregables',
+				softSkills: [
+					'Aprendizaje continuo',
+					'Creatividad e innovación',
+					'Empatía y escucha activa',
+					'Capacidad analítica alta',
+					'Adaptabilidad al cambio',
+					'Autonomía y seguridad'
+				]
 		},
 		blogPage: {
 			headTitle: 'Divulgación y blog · Fran',
@@ -486,7 +489,6 @@ export const profileContent: Record<Language, ProfileContent> = {
 		},
 		navbar: {
 			contactCta: 'Contacto',
-			languageSwitchLabel: 'Idioma',
 			menuLabel: 'Abrir menú de navegación'
 		},
 		projects: [
@@ -580,421 +582,5 @@ export const profileContent: Record<Language, ProfileContent> = {
 				tags: ['IA', 'Incident Response', 'Prompt Engineering']
 			}
 		]
-	},
-	en: {
-		siteMetadata: {
-			name: 'Fran',
-			title: 'Fran · Secure by Design Engineer',
-			description:
-				'Professional portfolio focused on advanced cybersecurity, applied cryptography and Secure by Design. I craft solutions with Rust, Python, Svelte and PostgreSQL.',
-			keywords: [
-				'Fran',
-				'Secure by Design',
-				'cybersecurity',
-				'Rust',
-				'SvelteKit',
-				'cryptography'
-			],
-			url: 'https://fran.dev',
-			image: '/og-image.svg',
-			language: 'en'
-		},
-		navigation: [
-			{ label: 'Home', href: '/', description: 'Profile and value proposition' },
-			{ label: 'Projects', href: '/projects', description: 'Technical cases and stack' },
-			{ label: 'Contact', href: '/contact', description: 'Mentoring and collaborations' }
-		],
-		hero: {
-			role: 'Secure by Design Engineer · AI & Rust enthusiast',
-			tagline:
-				'I build secure systems and experiences blending applied cryptography, cross-platform engineering and expressive design.',
-			ctaPrimary: {
-				label: 'Download resume',
-				href: '/fran-cv.pdf',
-				download: 'Fran-CV.pdf'
-			},
-			ctaSecondary: {
-				label: 'Get in touch',
-				href: '/contact'
-			},
-			values: [
-				'Transfer security',
-				'Secure systems design',
-				'Artificial intelligence',
-				'Auditing & awareness'
-			]
-		},
-		coreTechnologies: [
-			{ name: 'Java', category: 'language' },
-			{ name: 'Rust', category: 'language' },
-			{ name: 'Python', category: 'language' },
-			{ name: 'PostgreSQL', category: 'database' },
-			{ name: 'React', category: 'framework' },
-			{ name: 'Svelte', category: 'framework' },
-			{ name: 'Oracle SQL', category: 'database' },
-			{ name: 'Tailwind', category: 'tooling' }
-		],
-		stats: [
-			{ label: 'Years designing software', value: '5+' },
-			{ label: 'Audited systems', value: '20+' },
-			{ label: 'Talks and workshops', value: '15' }
-		],
-		timeline: [
-			{
-				year: '2024',
-				role: 'Master in Software Development & AI',
-				org: 'BIG School · MaureDev',
-				description: 'Generative models applied to network hardening and automated audits.'
-			},
-			{
-				year: '2023',
-				role: 'Advanced cybersecurity practice',
-				org: 'Self-directed',
-				description:
-					'I focus on modern encryption, emerging system-level tech, privilege minimization and Zero Trust strategies.'
-			},
-			{
-				year: '2022',
-				role: 'DAM · Multiplatform Apps',
-				org: 'FP Euroromac - Barajas',
-				description: 'Native and cross-platform apps with an emphasis on applied cryptography.'
-			}
-		],
-		socialLinks: [
-			{
-				label: 'GitHub',
-				handle: '@Fraancoboss',
-				href: 'https://github.com/Fraancoboss'
-			},
-			{
-				label: 'LinkedIn',
-				handle: 'fran-cobos-rodriguez',
-				href: 'https://www.linkedin.com/in/fran-cobos-rodriguez'
-			}
-		],
-		contactChannels: [
-			{
-				label: 'Email',
-				value: contactEmail,
-				subtitle: 'Reply within 24h',
-				href: `mailto:${contactEmail}`
-			},
-			{
-				label: 'GitHub',
-				value: 'github.com/Fraancoboss',
-				subtitle: 'Open source & experiments',
-				href: 'https://github.com/Fraancoboss'
-			},
-			{
-				label: 'LinkedIn',
-				value: 'linkedin.com/in/fran-cobos-rodriguez',
-				subtitle: 'Professional opportunities',
-				href: 'https://www.linkedin.com/in/fran-cobos-rodriguez'
-			}
-		],
-		favoriteTools: [
-			{
-				title: 'Documentation',
-				tools: ['Notion', 'Mermaid', 'Obsidian', 'Drive']
-			},
-			{
-				title: 'Data management',
-				tools: ['Oracle Developer', 'PostgreSQL', 'SQLite', 'Hibernate']
-			},
-			{
-				title: 'Frontend',
-				tools: ['React', 'SvelteKit', 'Tailwind', 'TypeScript', 'JavaScript']
-			},
-			{
-				title: 'Backend',
-				tools: ['Java', 'Python', 'Rust', 'SpringBoot']
-			},
-			{
-				title: 'Security',
-				tools: ['Shamir Secret Sharing', 'Rust', 'JWT', 'OTPT', 'Bandit', 'AES-GCM']
-			},
-			{
-				title: 'Cloud',
-				tools: ['AWS']
-			},
-			{
-				title: 'AI',
-				tools: ['ChatGPT / GPT-5.1', 'Windsurf', 'Claude 3.5 / DeepSeek R1', 'PentestGPT', 'N8N']
-			},
-			{
-				title: 'Multiplatform',
-				tools: ['React Native', 'Kotlin', 'Android Studio', 'Shortcuts (iOS)']
-			}
-		],
-		home: {
-			heroEyebrow: '',
-			heroTitle: 'A pleasure to meet you!',
-			heroSubtitle: 'About me',
-			biography: [
-				"I'm Fran, currently studying Multiplatform Application Development and the Master's in Software Development with Artificial Intelligence at BIG School led by MaureDev and a faculty of senior engineers.",
-				'I explore technologies such as Rust, Python and Svelte to design cryptographically secure data networks and optimize communication with relational and non-relational databases.',
-				'I spend most of my time sharing ideas about cryptography and advanced cybersecurity, applying Secure by Design principles during every build.',
-				"I'm also interested in integrating Swift and other iOS tooling to ship secure, efficient and scalable applications."
-			],
-			disciplineLine: 'AI + CYBERSECURITY',
-			disciplineComplement: '',
-			heroBadge: 'Blue team mindset within cybersecurity',
-			heroCards: [
-				{
-					alt: 'Pentesting and hardening',
-					caption: 'Pentesting',
-					overlayTitle: 'Offensive pentesting',
-					overlayDescription: 'Proactive vulnerability detection'
-				},
-				{
-					alt: 'AI and cybersecurity illustration',
-					caption: 'AI Defense',
-					overlayTitle: 'AI + Cybersecurity',
-					overlayDescription: 'Automated audits & playbooks'
-				},
-				{
-					alt: 'Applied cryptography',
-					caption: 'Data cryptography',
-					overlayTitle: 'Data protection',
-					overlayDescription: 'Shielded network requests & encryption'
-				},
-				{
-					alt: 'Secure by Design overview',
-					caption: 'Secure by Design',
-					overlayTitle: 'Secure by Design',
-					overlayDescription: 'Security-first product development'
-				}
-			],
-			stackSection: {
-				eyebrow: 'Core stack',
-				title: 'Technologies and principles in action',
-				description:
-					'I mix programming languages with modern frameworks and Secure by Design routines to deploy trustworthy systems.'
-			},
-			toolsSection: {
-				eyebrow: '',
-				title: '',
-				description: ''
-			},
-			networksLabel: 'Networks',
-			visionLabel: 'Passion',
-			visionLead:
-				'I devote my time to chasing innovation with every tool in the industry, leveraging AI along the way.',
-			visionSupporting:
-				'Security and responsibility always stay ahead when I build products.',
-			projectsPreview: {
-				eyebrow: 'Spotlight cases',
-				title: 'Architectures designed with a defensive mindset',
-				description:
-					'Projects that blend distributed secret custody, a Rust CLI and a JavaFX + ORM client to show how I connect security with clean developer experiences.',
-				ctaLabel: 'See all projects →'
-			},
-			timelineSection: {
-				eyebrow: 'Journey',
-				title: 'Studies and research focus',
-				description: 'Pairing DAM with the AI master to ship safer products.'
-			},
-			timelineExtras: [
-				{
-					title: 'Generative AI Community',
-					description: 'Innovation circle focused on AI experiments'
-				},
-				{
-					title: 'LinkedIn activity',
-					description: 'Weekly posts and technical writing'
-				},
-				{
-					title: 'GitHub activity',
-					description: 'Repository research and open collaboration'
-				}
-			]
-		},
-		projectsPage: {
-			headTitle: 'Projects · Fran',
-			headDescription:
-				'Case studies on cybersecurity, applied AI and Secure by Design.',
-			section: {
-				eyebrow: 'Projects',
-				title: 'Solutions crafted with a defensive mindset',
-				description: 'From prototype to production: documentation, threat modeling and reproducible deploys.'
-			},
-			filters: [
-				{ id: 'all', label: 'All' },
-				{ id: 'production', label: 'In production' },
-				{ id: 'in-progress', label: 'In progress' },
-				{ id: 'prototype', label: 'Prototype' }
-			],
-			statusLabels: {
-				production: 'In production',
-				'in-progress': 'In progress',
-				prototype: 'Prototype'
-			},
-			emptyState: 'No results for',
-			projectLabel: 'Project'
-		},
-		contactPage: {
-			headTitle: 'Contact · Fran',
-			headDescription:
-				'Book a mentoring session, request an audit or collaborate on Secure by Design projects.',
-			section: {
-				eyebrow: 'Contact',
-				title: "Let's talk about security, design or content",
-				description: 'I reply in under 24h.'
-			},
-			networksLabel: 'Networks',
-			directContactLabel: 'Direct contact',
-			directEmail: 'fraancoboss@gmail.com',
-			directStatusText: 'Actively seeking programming internships to contribute in real environments.',
-			groupedHighlights: [
-				{
-					title: 'Availability',
-					description:
-						'I’m looking for internships where I can apply cybersecurity, AI and secure system design while adding thorough documentation, threat modeling and automation.'
-				},
-				{
-					title: 'Focus',
-					description:
-						'DAM plus SMR gave me a solid background in systems and networking. At Tigestion I rolled out networks on-site and solved incidents, which refined my operational instincts.'
-				},
-				{
-					title: 'Reputation',
-					description:
-						'I actively share learnings, maintain tidy repositories and collaborate in communities to build trust in every engagement.'
-				}
-			],
-			formTitle: 'Contact me now',
-			nameLabel: 'Full name',
-			emailLabel: 'Professional email',
-			topicLabel: 'Topic',
-			topics: [
-				{ value: 'informacion', label: 'About my profile' },
-				{ value: 'interes', label: 'Career opportunity' },
-				{ value: 'colaboracion', label: 'Creative collaboration' }
-			],
-			messageLabel: 'Message',
-			consentCopy: 'I agree to receive a reply with technical suggestions.',
-			submitLabel: 'Send request',
-			disabledNotice:
-				'Set `PUBLIC_CONTACT_ENDPOINT` to enable submissions (Formspree, Getform, Basin, etc.).'
-		},
-		blogPage: {
-			headTitle: 'Writing & blog · Fran',
-			headDescription:
-				'Technical essays on cybersecurity, applied cryptography and Secure by Design.',
-			section: {
-				eyebrow: 'Writing',
-				title: 'Ideas, guides and studies on advanced security',
-				description: 'Content ready to become mdsvex posts and connect with your projects.'
-			},
-			emptyState: 'Markdown posts are on the way—mdsvex integration is ready.',
-			postMetaPrefix: 'Published on'
-		},
-		footer: {
-			tagline:
-				'I design secure digital solutions by blending applied cryptography, defensive AI and human-centered design.',
-			siteMapTitle: 'Sitemap',
-			availabilityTitle: 'Availability',
-			availability: [
-				'Open to professional internships',
-				'Collaborations in offensive cybersecurity',
-				'Designing secure visual frameworks'
-			],
-			signature: 'Built with SvelteKit, TypeScript and TailwindCSS.'
-		},
-		navbar: {
-			contactCta: 'Contact',
-			languageSwitchLabel: 'Language',
-			menuLabel: 'Open navigation menu'
-		},
-		projects: [
-			{
-				title: 'SecureShareVault',
-				slug: 'securesharevault',
-				overview:
-					'Client-server communication system that encrypts with AES-GCM, distributes keys with Shamir Secret Sharing and coordinates external custodians before storing any payload.',
-				impact:
-					'Keeps secrets away from the central backend, withstands MITM thanks to JWT + optional TLS and simplifies audits with dedicated modules for crypto, orchestration and testing.',
-				tech: ['Python', 'Flask', 'AES-GCM', 'Shamir Secret Sharing', 'JWT', 'Docker'],
-				status: 'prototype',
-				year: 2024,
-				cta: {
-					label: 'View repository',
-					href: 'https://github.com/Fraancoboss/SecureShareVault'
-				},
-				links: [
-					{
-						label: 'Technical README',
-						href: 'https://github.com/Fraancoboss/SecureShareVault#readme',
-						external: true
-					}
-				],
-				highlight: 'Distributed key custody with configurable threshold and MITM tooling for testing'
-			},
-			{
-				title: 'Rust authentication CLI',
-				slug: 'login-rust-svelte',
-				overview:
-					'Command-line application aimed at educational environments to register users and manage logins using Argon2id hashing and layered brute-force defenses.',
-				impact:
-					'Blends hardened hashing, strict password policy, dictionary streaming checks and timed lockouts, plus a lightweight Svelte frontend to exercise the experience end to end.',
-				tech: ['Rust', 'Argon2id', 'Svelte', 'Vite', 'rpassword', 'rockyou.txt.gz'],
-				status: 'prototype',
-				year: 2024,
-				cta: {
-					label: 'View repository',
-					href: 'https://github.com/Fraancoboss/login-rust-svelte'
-				},
-				highlight:
-					'Ships a demo frontend, weak-pattern detection and a configurable lock after five failed attempts'
-			},
-			{
-				title: 'Hibernate + SQLite + JavaFX',
-				slug: 'hibernate-sqlite-javafx',
-				overview:
-					'Desktop application built with JavaFX and Hibernate showcasing secure CRUD patterns on SQLite with DAO layers, validation and a modern interface.',
-				impact:
-					'Pairs ORM integration, input hygiene and responsive UI components to demonstrate best practices for Java desktop products.',
-				tech: ['Java', 'JavaFX', 'Hibernate', 'SQLite', 'CSS'],
-				status: 'in-progress',
-				year: 2024,
-				cta: {
-					label: 'View repository',
-					href: 'https://github.com/Fraancoboss/hibernate-sqlite-javafx'
-				},
-				highlight: 'Layered DAO architecture, validation and custom-styled UI ready for production use'
-			}
-		],
-		featuredPosts: [
-			{
-				title: 'Secure by Design applied to software-defined networks',
-				slug: 'secure-by-design-redes-sd',
-				excerpt:
-					'How to model threats from the design layer and automate validations with reproducible pipelines.',
-				category: 'Secure by Design',
-				publishedAt: '2024-10-01',
-				readingTime: '8 min',
-				tags: ['SbD', 'DevSecOps', 'Rust', 'Infra as Code']
-			},
-			{
-				title: 'Practical cryptography with Rust: post-quantum signatures on lightweight clients',
-				slug: 'criptografia-rust-firmas-pqc',
-				excerpt:
-					'I explore tactics to integrate quantum-resistant primitives into constrained devices.',
-				category: 'Cryptography',
-				publishedAt: '2024-07-18',
-				readingTime: '6 min',
-				tags: ['Rust', 'PQC', 'Tink', 'Embedded']
-			},
-			{
-				title: 'Defensive AI playbooks for early response teams',
-				slug: 'playbooks-ia-defensiva',
-				excerpt:
-					'Templates and specialized prompts to generate incident reports and realistic simulations.',
-				category: 'Applied AI',
-				publishedAt: '2024-05-12',
-				readingTime: '7 min',
-				tags: ['AI', 'Incident Response', 'Prompt Engineering']
-			}
-		]
-	}
+
 };

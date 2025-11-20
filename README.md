@@ -40,11 +40,12 @@ src/
 │  ├─ assets/       # imágenes hero
 │  └─ types/        # Tipos para el contenido
 ├─ routes/
-│  ├─ +layout.svelte   # Layout raíz con metadatos SEO
-│  ├─ +page.svelte     # Home
+│  ├─ +layout.svelte      # Layout raíz con metadatos SEO
+│  ├─ +page.svelte        # Home
 │  ├─ projects/+page.svelte
 │  ├─ blog/+page.(svelte|ts)
-│  └─ contact/+page.svelte
+│  ├─ contact/+page.svelte   # Apartado “Sobre mí” (experiencia)
+│  └─ contacto/+page.svelte  # Página de canales de contacto
 └─ app.css             # Tema base (Tailwind 4)
 ```
 
@@ -52,11 +53,11 @@ src/
 
 1. Abre `src/lib/data/profile.ts` y modifica las secciones `hero`, `projects`, `contactPage`, etc.
 2. Las imágenes de las tarjetas están en `src/lib/assets/`.
-3. Para añadir proyectos al listado completo o al _spotlight_, actualiza `profileContent.es.projects`.
+3. Para añadir proyectos al listado completo o al _spotlight_, actualiza `profileContent.projects`.
 
 ### Contacto sin formularios
 
-El archivo `src/routes/contact/+page.svelte` se renderiza como estático, mostrando correo, estado y redes. Si en el futuro necesitas un formulario real, deberás integrar un servicio externo y añadir nuevamente un endpoint o `PUBLIC_CONTACT_ENDPOINT`.
+La ruta `src/routes/contacto/+page.svelte` es completamente estática y expone correo, redes y CTA sin endpoints. Si necesitas un formulario real deberás integrar un servicio externo y volver a activar un endpoint (`PUBLIC_CONTACT_ENDPOINT`, Formspree, Basin, etc.).
 
 ## Despliegue en GitHub Pages
 
@@ -68,14 +69,14 @@ El archivo `src/routes/contact/+page.svelte` se renderiza como estático, mostra
 ## Decisiones de diseño documentadas
 
 - **Idioma único (español)**: al desplegarse como HTML estático, mantener un solo idioma evita estados incompletos tras refrescar o navegar desde GitHub Pages.
-- **Datos centralizados**: preferí `profileContent.es` como fuente única para todos los componentes para reducir dependencias entre páginas.
+- **Datos centralizados**: preferí `profileContent` como fuente única para todos los componentes para reducir dependencias entre páginas.
 - **Contacto sin POST**: se eliminó el formulario porque no existe backend en Pages; eso se explica en el código y README para evitar confusión.
 
 ## Próximos pasos sugeridos
 
 - Añadir versiones en inglés creando rutas estáticas (`/en`) duplicadas.
 - Integrar un servicio de formularios (Formspree, Basin, etc.) si se necesita captura de leads.
-- Rellenar `/blog/(posts)` con artículos mdsvex y activar `featuredPostsByLanguage` si se decide volver al multilenguaje.
+- Rellenar `/blog/(posts)` con artículos mdsvex a medida que publiques contenido.
 
 ---
 

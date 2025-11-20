@@ -60,4 +60,5 @@ export type ContactChannel = {
 	value: string;
 	subtitle?: string;
 	href?: string;
+	fullWidth?: boolean;
 };

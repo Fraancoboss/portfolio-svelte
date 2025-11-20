@@ -4,12 +4,12 @@
 	import type { PageData } from './$types';
 	import { profileContent } from '$lib/data/profile';
 
-	// Decisión: fijamos la fuente de datos en profileContent.es para mantener
-	// coherencia con el resto del sitio estático.
+	// Decisión: usamos profileContent directamente para mantener coherencia
+	// con el resto del sitio estático.
 	let { data }: { data: PageData } = $props();
 	const withBase = (path: string) => `${base}${path}`;
-	const blogPage = profileContent.es.blogPage;
-	const featuredPosts = profileContent.es.featuredPosts;
+	const blogPage = profileContent.blogPage;
+	const featuredPosts = profileContent.featuredPosts;
 </script>
 
 <svelte:head>

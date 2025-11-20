@@ -13,8 +13,8 @@
 
 let { metadata = {}, children }: { metadata?: PostMetadata; children?: Snippet } = $props();
 
-// Decisión: los posts se renderizan con los metadatos de profileContent.es para mantener consistencia.
-const content = profileContent.es;
+// Decisión: los posts se renderizan con los metadatos de profileContent para mantener consistencia.
+const content = profileContent;
 </script>
 
 <svelte:head>
@@ -31,7 +31,7 @@ const content = profileContent.es;
 		<p class="text-xs uppercase tracking-[0.3em] text-primary/70">{metadata.category}</p>
 		<h1 class="text-4xl font-semibold text-slate-50">{metadata.title}</h1>
 		<p class="text-sm text-slate-400">
-			{profileContent.es.blogPage.postMetaPrefix} {metadata.publishedAt} · {metadata.readingTime}
+			{profileContent.blogPage.postMetaPrefix} {metadata.publishedAt} · {metadata.readingTime}
 		</p>
 	</header>
 	{@render children?.()}

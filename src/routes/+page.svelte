@@ -10,11 +10,10 @@
 	import { profileContent } from '$lib/data/profile';
 
 	/**
-	 * Decisión: usamos los datos de profileContent.es directamente. Mantener una sola fuente
-	 * facilita razonar sobre el contenido y evita capas de estado que no aportaban funcionalidad
-	 * tras eliminar el selector de idioma.
+	 * Decisión: usamos los datos de profileContent directamente. Mantener una sola fuente
+	 * facilita razonar sobre el contenido y evita capas de estado que no aportan funcionalidad.
 	 */
-	const content = profileContent.es;
+	const content = profileContent;
 	const heroCardAssets = [hackerLogo, aiSecurity, cryptoImage, pentesting];
 	const heroCardFilter = 'hue-rotate(-8deg) saturate(1.2) brightness(1.08)';
 
@@ -34,8 +33,9 @@
 	});
 	const favoriteTools = content.favoriteTools;
 	const tickerValues =
-		'CONCIENCIACIÓN Y AUDITORIA · INTELIGENCIA ARTIFICIAL · TRANSFERENCIA SEGURA DE DATOS · DESARROLLO DE SISTEMAS SEGUROS · ...';
+		'CONCIENCIACIÓN Y AUDITORIA · INTELIGENCIA ARTIFICIAL · TRANSFERENCIA SEGURA DE DATOS · DESARROLLO DE SISTEMAS SEGUROS';
 	const technologies = content.coreTechnologies;
+	const securityPrinciples = ['Secure by Design', 'Zero Trust', 'Least Privilege', 'IAM'];
 	const spotlightProjects = content.projects.slice(0, 2);
 	const socialLinks = content.socialLinks;
 	const timeline = content.timeline;
@@ -47,7 +47,7 @@
 			<p class="text-xs font-semibold uppercase tracking-[0.4em] text-primary/70">{home.heroEyebrow}</p>
 		{/if}
 		<h1 class="text-4xl font-semibold text-slate-50 sm:text-5xl">{home.heroTitle}</h1>
-		<p class="text-sm uppercase tracking-[0.3em] text-transparent bg-gradient-to-r from-red-500 via-rose-500 to-red-600 bg-clip-text font-bold">
+		<p class="text-sm uppercase tracking-[0.3em] text-transparent bg-gradient-to-r from-sky-400 via-cyan-300 to-indigo-400 bg-clip-text font-bold">
 			{home.heroSubtitle}
 		</p>
 		<div class="space-y-4 text-base font-semibold leading-relaxed text-body">
@@ -72,7 +72,7 @@
 		</div>
 	</div>
 	<div class="space-y-4 rounded-3xl border border-border/70 bg-surface/60 p-6 shadow-2xl backdrop-blur">
-		<p class="text-center text-xs uppercase tracking-[0.3em] text-transparent bg-gradient-to-r from-red-500 via-rose-500 to-red-600 bg-clip-text font-bold">
+		<p class="text-center text-xs uppercase tracking-[0.3em] text-transparent bg-gradient-to-r from-sky-400 via-cyan-300 to-indigo-400 bg-clip-text font-bold">
 			{home.disciplineLine}
 			{#if home.disciplineComplement}
 				<br />
@@ -99,11 +99,11 @@
 				/>
 			{/each}
 		</div>
-		<p class="text-center text-sm font-semibold text-transparent bg-gradient-to-r from-rose-200 via-red-200 to-rose-100 bg-clip-text">
+		<p class="text-center text-sm font-semibold text-transparent bg-gradient-to-r from-sky-200 via-cyan-100 to-indigo-200 bg-clip-text">
 			{home.heroBadge}
 		</p>
 	</div>
-	<div class="lg:col-span-2 overflow-hidden rounded-3xl border border-rose-500/40 bg-gradient-to-r from-slate-900/70 via-rose-900/40 to-slate-900/70 text-xs font-semibold uppercase tracking-[0.3em] text-rose-200">
+	<div class="lg:col-span-2 overflow-hidden rounded-3xl border border-sky-400/40 bg-gradient-to-r from-slate-900/70 via-blue-950/40 to-slate-900/70 text-xs font-semibold uppercase tracking-[0.3em] text-sky-200">
 		<div class="ticker-track">
 			<p>{tickerValues}</p>
 			<p aria-hidden="true">{tickerValues}</p>
@@ -111,7 +111,7 @@
 	</div>
 	<div class="lg:col-span-2 space-y-8">
 		<div class="space-y-3">
-			<p class="text-sm uppercase tracking-[0.3em] text-transparent bg-gradient-to-r from-red-500 via-rose-500 to-red-600 bg-clip-text font-bold">
+			<p class="text-sm uppercase tracking-[0.3em] text-transparent bg-gradient-to-r from-sky-400 via-cyan-300 to-indigo-400 bg-clip-text font-bold">
 				{home.stackSection.eyebrow}
 			</p>
 			<p class="text-2xl font-semibold text-slate-100">{home.stackSection.title}</p>
@@ -126,12 +126,22 @@
 					<p class="text-xl font-semibold text-slate-100">{tech.name}</p>
 				</div>
 			{/each}
+			<div class="rounded-2xl border border-border/70 bg-sky-200/10 p-4 text-center sm:col-span-2 lg:col-span-4">
+				<p class="text-sm uppercase tracking-[0.3em] text-transparent bg-gradient-to-r from-sky-400 via-cyan-300 to-indigo-400 bg-clip-text font-bold">
+					Principios Blue Team Aplicados
+				</p>
+				<div class="mt-3 grid gap-2 text-sm sm:grid-cols-2 lg:grid-cols-4">
+					{#each securityPrinciples as principle}
+						<p class="rounded-xl border border-border/60 bg-surface/70 px-3 py-2 text-body">{principle}</p>
+					{/each}
+				</div>
+			</div>
 		</div>
 	<div class="border-t border-primary/80"></div>
 		<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
 			{#each favoriteTools as category}
 				<div class="rounded-2xl border border-border/70 bg-surface/60 p-4">
-					<p class="text-sm uppercase tracking-[0.3em] text-transparent bg-gradient-to-r from-red-500 via-rose-500 to-red-600 bg-clip-text font-bold">
+					<p class="text-sm uppercase tracking-[0.3em] text-transparent bg-gradient-to-r from-sky-400 via-cyan-300 to-indigo-400 bg-clip-text font-bold">
 						{category.title}
 					</p>
 					<div class="mt-3 space-y-2 text-sm">
@@ -147,7 +157,7 @@
 
 <section class="grid gap-12 py-10 lg:grid-cols-2 lg:items-stretch">
 	<div class="space-y-6 rounded-3xl border border-border/70 bg-surface/60 p-6 shadow-2xl backdrop-blur">
-		<p class="text-sm uppercase tracking-[0.3em] text-transparent bg-gradient-to-r from-red-500 via-rose-500 to-red-600 bg-clip-text font-bold">
+		<p class="text-sm uppercase tracking-[0.3em] text-transparent bg-gradient-to-r from-sky-400 via-cyan-300 to-indigo-400 bg-clip-text font-bold">
 			{home.networksLabel}
 		</p>
 		<div class="space-y-3 text-sm text-slate-300">
@@ -165,7 +175,7 @@
 		</div>
 	</div>
 	<div class="space-y-4 rounded-3xl border border-border/70 bg-surface/60 p-6 shadow-2xl backdrop-blur">
-		<p class="text-sm uppercase tracking-[0.3em] text-transparent bg-gradient-to-r from-red-500 via-rose-500 to-red-600 bg-clip-text font-bold">
+		<p class="text-sm uppercase tracking-[0.3em] text-transparent bg-gradient-to-r from-sky-400 via-cyan-300 to-indigo-400 bg-clip-text font-bold">
 			{home.visionLabel}
 		</p>
 		<p class="text-lg text-body">

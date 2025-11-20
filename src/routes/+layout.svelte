@@ -7,13 +7,13 @@
 
 	let { children } = $props();
 
-	// Decisión: usamos profileContent.es directamente porque el despliegue estático
-	// obliga a fijar un idioma. Esto evita lógicas de idioma que no aportan funcionalidad real.
-	const siteMetadata = profileContent.es.siteMetadata;
+	// Decisión: usamos profileContent directamente porque el despliegue estático fija un idioma
+	// y evita lógicas adicionales que no aportan funcionalidad real.
+	const siteMetadata = profileContent.siteMetadata;
 	const ogImage = siteMetadata.image.startsWith('http')
 		? siteMetadata.image
 		: `${base}${siteMetadata.image}`;
-	const ogLocale = siteMetadata.language === 'en' ? 'en_US' : 'es_ES';
+	const ogLocale = 'es_ES';
 </script>
 
 <svelte:head>

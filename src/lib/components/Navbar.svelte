@@ -4,13 +4,13 @@
 	import { profileContent } from '$lib/data/profile';
 
 	/**
-	 * Decisión: fijamos todo el contenido en la versión española (profileContent.es)
+	 * Decisión: fijamos todo el contenido en profileContent
 	 * para simplificar el despliegue estático en GitHub Pages y evitar dependencias
 	 * con stores globales o sincronización de idioma. Este componente solo necesita
 	 * datos inmutables de navegación y CTA, por lo que mantenerlos en constantes
 	 * reduce la complejidad y deja claro de dónde salen los textos.
 	 */
-	const content = profileContent.es;
+	const content = profileContent;
 	const navigation = content.navigation;
 	const navbarCopy = content.navbar;
 
@@ -29,7 +29,7 @@
 <header class="sticky top-0 z-30 border-b border-border/70 bg-surface/80 backdrop-blur-lg">
 	<div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
 		<a class="flex items-center gap-2 text-lg font-semibold tracking-tight" href={resolveHref('/')}>
-			<span class="uppercase tracking-[0.3em] text-transparent bg-gradient-to-r from-red-500 via-rose-500 to-red-600 bg-clip-text">
+			<span class="uppercase tracking-[0.3em] text-transparent bg-gradient-to-r from-sky-400 via-cyan-300 to-indigo-400 bg-clip-text">
 				FRAN COBOS RODRÍGUEZ
 			</span>
 		</a>
@@ -50,8 +50,8 @@
 				</a>
 			{/each}
 			<a
-				href={resolveHref('/contact')}
-				class="inline-flex items-center gap-2 rounded-full border border-primary/40 px-4 py-1.5 text-xs uppercase tracking-widest text-primary transition hover:-translate-y-0.5 hover:border-primary/80 hover:text-white"
+				href={resolveHref('/contacto')}
+				class="inline-flex items-center gap-2 rounded-full border border-primary/40 px-4 py-1.5 text-xs uppercase tracking-widest text-primary transition hover:-translate-y-0.5 hover:border-primary/80 hover:bg-sky-200/10 hover:text-primary"
 			>
 				<span>{navbarCopy.contactCta}</span>
 			</a>
@@ -97,8 +97,8 @@
 			</nav>
 			<div class="mt-4 flex flex-wrap items-center justify-between gap-3">
 				<a
-					href={resolveHref('/contact')}
-					class="inline-flex items-center gap-2 rounded-full border border-primary/40 px-4 py-2 text-xs uppercase tracking-[0.3em] text-primary"
+					href={resolveHref('/contacto')}
+					class="inline-flex items-center gap-2 rounded-full border border-primary/40 px-4 py-2 text-xs uppercase tracking-[0.3em] text-primary hover:bg-sky-200/10"
 					onclick={() => (isMenuOpen = false)}
 				>
 					{navbarCopy.contactCta}

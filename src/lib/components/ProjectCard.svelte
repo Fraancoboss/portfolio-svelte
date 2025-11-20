@@ -2,8 +2,8 @@
 	import type { Project } from '$lib/types/content';
 	import { profileContent } from '$lib/data/profile';
 
-	let { project }: { project: Project } = $props();
-	const copy = profileContent.es.projectsPage;
+let { project }: { project: Project } = $props();
+const copy = profileContent.projectsPage;
 </script>
 
 <article

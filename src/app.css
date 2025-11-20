@@ -10,9 +10,9 @@
 	--color-surface-elevated: #0f0f10;
 	--color-muted: #9ca3af;
 	--color-border: #1a1a1d;
-	--color-primary: #ef4444;
-	--color-secondary: #b91c1c;
-	--color-body-text: #c8b0b5;
+	--color-primary: #5de0ff;
+	--color-secondary: #7da2ff;
+	--color-body-text: #c6d4f5;
 	--radius-xl: 1.5rem;
 	--radius-lg: 1rem;
 }
@@ -28,9 +28,9 @@
 
 	body {
 		@apply bg-surface font-sans antialiased min-h-screen;
-		background-image: radial-gradient(circle at 10% 20%, rgba(239, 68, 68, 0.12), transparent 35%),
-			radial-gradient(circle at 80% 0%, rgba(185, 28, 28, 0.15), transparent 40%),
-			linear-gradient(180deg, rgba(5, 6, 8, 0.95), rgba(5, 6, 8, 1));
+		background-image: radial-gradient(circle at 10% 20%, rgba(93, 224, 255, 0.14), transparent 35%),
+			radial-gradient(circle at 80% 0%, rgba(125, 162, 255, 0.2), transparent 40%),
+			linear-gradient(180deg, rgba(5, 6, 12, 0.95), rgba(5, 6, 10, 1));
 		margin: 0;
 		color: var(--color-body-text);
 	}

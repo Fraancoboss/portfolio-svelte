@@ -4,8 +4,8 @@
 	import { profileContent } from '$lib/data/profile';
 
 	// Decisión: los proyectos se leen directamente del contenido estático en español.
-	const projectsPage = profileContent.es.projectsPage;
-	const projects = profileContent.es.projects;
+	const projectsPage = profileContent.projectsPage;
+	const projects = profileContent.projects;
 </script>
 
 <svelte:head>

@@ -3,11 +3,11 @@
 	import { profileContent } from '$lib/data/profile';
 
 	/**
-	 * Decisión: la información del pie se resuelve una sola vez desde profileContent.es
+	 * Decisión: la información del pie se resuelve una sola vez desde profileContent
 	 * para dejar claro que el sitio se publica en español fijo y no depende de stores reactivos.
 	 * Esto documenta explícitamente de dónde salen navegación, redes y textos legales.
 	 */
-	const content = profileContent.es;
+	const content = profileContent;
 	const year = new Date().getFullYear();
 	const resolveHref = (href: string) => (href.startsWith('http') ? href : `${base}${href}`);
 </script>
