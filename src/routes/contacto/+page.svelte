@@ -6,9 +6,8 @@
 	const contactChannels = content.contactChannels;
 	const contactIntro = {
 		eyebrow: 'Contacto',
-		title: 'Conversemos sobre prácticas, auditorías o mentorías',
-		description:
-			'Respondo en menos de 24h y adapto el canal a tus necesidades. Estos son los medios más directos.'
+		title: 'Conversemos sobre prácticas, seguridad o futuro',
+		description: 'Respondo en menos de 24h. Estos son los medios más directos.'
 	};
 </script>
 

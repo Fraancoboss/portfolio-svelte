@@ -11,5 +11,3 @@ export * from './data/projects';
 export * from './data/posts';
 export * from './types/content';
 export * from './security/validation';
-export * from './security/recaptcha';
-export * from './security/rate-limit';
