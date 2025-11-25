@@ -25,7 +25,7 @@
 		const ratio = window.devicePixelRatio || 1;
 		canvasHeight = window.innerHeight;
 
-		canvasWidth = fillViewportSide ? Math.max(width, Math.round(window.innerWidth / 2)) : width;
+		canvasWidth = fillViewportSide ? Math.max(width, Math.round(window.innerWidth / 2) + offset) : width;
 
 		canvas.width = canvasWidth * ratio;
 		canvas.height = canvasHeight * ratio;
@@ -52,15 +52,15 @@
 		context.fillStyle = 'rgba(93, 224, 255, 0.65)';
 		context.font = `${fontSize}px "Space Mono", "Space Grotesk", monospace`;
 
-		const horizontalFade = Math.min(centerFadeWidth, canvasWidth / 2);
+		const horizontalFade = Math.min(centerFadeWidth, canvasWidth);
 
 		const fadeAlpha = (x: number) => {
 			if (horizontalFade <= 0) return 1;
 			if (side === 'left') {
-				if (x < canvasWidth - horizontalFade) return 1;
+				if (x <= canvasWidth - horizontalFade) return 1;
 				return Math.max(0, (canvasWidth - x) / horizontalFade);
 			}
-			if (x > horizontalFade) return 1;
+			if (x >= horizontalFade) return 1;
 			return Math.max(0, x / horizontalFade);
 		};
 

@@ -45,8 +45,8 @@
 </script>
 
 <div class="matrix-frame">
-	<MatrixRain side="left" width={360} offset={280} fillViewportSide centerFadeWidth={220} />
-	<MatrixRain side="right" width={380} offset={300} fillViewportSide centerFadeWidth={220} />
+	<MatrixRain side="left" width={520} offset={360} fillViewportSide centerFadeWidth={320} />
+	<MatrixRain side="right" width={520} offset={360} fillViewportSide centerFadeWidth={320} />
 	<section class="grid gap-12 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
 		<div class="space-y-6">
 			{#if home.heroEyebrow}
