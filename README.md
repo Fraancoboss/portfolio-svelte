@@ -10,6 +10,14 @@ Portafolio personal construido con **SvelteKit 5**, **TailwindCSS 4** y mdsvex. 
 - **Preparado para despliegue estático**: usa `@sveltejs/adapter-static` y define `paths.base` para GitHub Pages (`/portfolio-svelte`). No existe lógica de idioma ni formularios dependientes de _backend_.
 - **Tipado completo**: tipos en `src/lib/types/content.ts` documentan cada bloque de datos (proyectos, timeline, contacto, etc.).
 
+## Seguridad y buenas prácticas
+
+- **Cabeceras endurecidas**: `src/hooks.server.ts` limita métodos permitidos y aplica CSP, HSTS, permisos y políticas anti-clickjacking documentadas para que cualquier auditoría entienda por qué se configuró cada header.
+- **Serialización controlada**: el `handle` sólo expone `content-type` y cabeceras personalizadas al cliente, minimizando fugas de información desde SvelteKit.
+- **Sanitización de contenido**: los metadatos provenientes de mdsvex se pasan por `src/lib/security/validation.ts` y `src/routes/blog/+page.ts` antes de renderizarse para mitigar XSS desde el frontmatter.
+- **Enlaces seguros**: todos los enlaces externos usan `rel="noreferrer noopener"` (documentado en cada componente) para evitar _tabnabbing_ y fugas de `Referrer`.
+- **Documentación in-code**: las decisiones de seguridad críticas (headers, sanitizado, enlaces externos) incluyen comentarios en español que explican el contexto para futuros mantenedores.
+
 ## Stack
 
 - [SvelteKit 5](https://kit.svelte.dev/)

@@ -8,6 +8,7 @@
 	import cryptoImage from '$lib/assets/criptografia.png';
 	import { base } from '$app/paths';
 	import { profileContent } from '$lib/data/profile';
+	import MatrixRain from '$lib/components/MatrixRain.svelte';
 
 	/**
 	 * Decisión: usamos los datos de profileContent directamente. Mantener una sola fuente
@@ -39,13 +40,18 @@
 	const spotlightProjects = content.projects.slice(0, 2);
 	const socialLinks = content.socialLinks;
 	const timeline = content.timeline;
+	// Evitamos tabnabbing cuando abrimos redes en otra pestaña.
+	const externalRel = 'noreferrer noopener';
 </script>
 
-<section class="grid gap-12 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-	<div class="space-y-6">
-		{#if home.heroEyebrow}
-			<p class="text-xs font-semibold uppercase tracking-[0.4em] text-primary/70">{home.heroEyebrow}</p>
-		{/if}
+<div class="matrix-frame">
+	<MatrixRain side="left" width={140} />
+	<MatrixRain side="right" width={160} />
+	<section class="grid gap-12 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+		<div class="space-y-6">
+			{#if home.heroEyebrow}
+				<p class="text-xs font-semibold uppercase tracking-[0.4em] text-primary/70">{home.heroEyebrow}</p>
+			{/if}
 		<h1 class="text-4xl font-semibold text-slate-50 sm:text-5xl">{home.heroTitle}</h1>
 		<p class="text-sm uppercase tracking-[0.3em] text-transparent bg-gradient-to-r from-sky-400 via-cyan-300 to-indigo-400 bg-clip-text font-bold">
 			{home.heroSubtitle}
@@ -166,7 +172,7 @@
 					class="flex items-center justify-between rounded-xl border border-border px-4 py-3 hover:border-primary/60 hover:text-primary"
 					href={social.href}
 					target="_blank"
-					rel="noreferrer"
+					rel={externalRel}
 				>
 					<span>{social.label}</span>
 					<span class="text-xs uppercase tracking-[0.3em] text-slate-500">{social.handle}</span>
@@ -187,11 +193,20 @@
 	</div>
 </section>
 
-<style>
-	.ticker-track {
-		display: flex;
-		gap: 4rem;
-		padding: 1rem 0;
+	<style>
+		.matrix-frame {
+			position: relative;
+		}
+
+		.matrix-frame > section {
+			position: relative;
+			z-index: 1;
+		}
+
+		.ticker-track {
+			display: flex;
+			gap: 4rem;
+			padding: 1rem 0;
 		animation: ticker 16s linear infinite;
 	}
 
@@ -206,9 +221,10 @@
 
 		to {
 			transform: translateX(-50%);
+			}
 		}
-	}
-</style>
+
+	</style>
 
 <section class="py-16">
 	<div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
@@ -257,3 +273,4 @@
 			</div>
 		</div>
 	</section>
+</div>

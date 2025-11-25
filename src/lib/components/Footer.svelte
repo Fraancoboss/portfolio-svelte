@@ -10,6 +10,8 @@
 	const content = profileContent;
 	const year = new Date().getFullYear();
 	const resolveHref = (href: string) => (href.startsWith('http') ? href : `${base}${href}`);
+	// Seguridad documentada: noopener y noreferrer bloquean tabnabbing en redes sociales.
+	const externalRel = 'noreferrer noopener';
 </script>
 
 <footer class="border-t border-border/80 bg-surface/80">
@@ -24,7 +26,7 @@
 					<a
 						href={social.href}
 						target="_blank"
-						rel="noreferrer"
+						rel={externalRel}
 						class="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 text-xs uppercase tracking-widest text-slate-300 transition hover:border-primary/60 hover:text-primary"
 					>
 						{social.label}

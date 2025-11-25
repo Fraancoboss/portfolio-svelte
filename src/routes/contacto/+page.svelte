@@ -4,6 +4,8 @@
 
 	const content = profileContent;
 	const contactChannels = content.contactChannels;
+	// Documentado para futuras auditorías: evitar tabnabbing en enlaces externos.
+	const externalRel = 'noreferrer noopener';
 	const contactIntro = {
 		eyebrow: 'Contacto',
 		title: 'Conversemos sobre prácticas, seguridad o futuro',
@@ -45,7 +47,7 @@
 						class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-secondary"
 						href={channel.href}
 						target={channel.href.startsWith('http') ? '_blank' : undefined}
-						rel={channel.href.startsWith('http') ? 'noreferrer' : undefined}
+						rel={channel.href.startsWith('http') ? externalRel : undefined}
 					>
 						<span>
 							{channel.label === 'LinkedIn'

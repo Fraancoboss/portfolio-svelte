@@ -15,6 +15,10 @@ type MarkdownModule = {
 const markdownModules = import.meta.glob('./(posts)/*/+page.md', { eager: true });
 
 export const load = (() => {
+	/**
+	 * Cada entrada mdsvex puede definir `metadata` arbitrario; lo sanitizamos antes de renderizar
+	 * para que el frontmatter no pueda inyectar etiquetas HTML ni scripts.
+	 */
 	const sanitizePost = (post: {
 		slug: string;
 		title: string;

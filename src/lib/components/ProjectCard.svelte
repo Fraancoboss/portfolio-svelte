@@ -4,6 +4,8 @@
 
 let { project }: { project: Project } = $props();
 const copy = profileContent.projectsPage;
+// Documentado: siempre usamos noopener/noreferrer para CTAs que abren otra pestaña.
+const externalRel = 'noreferrer noopener';
 </script>
 
 <article
@@ -45,7 +47,7 @@ const copy = profileContent.projectsPage;
 				href={project.cta.href}
 				class="inline-flex items-center gap-2 rounded-full border border-primary/40 px-4 py-2 text-sm font-semibold text-primary transition hover:border-primary hover:text-white"
 				target={project.cta.href.startsWith('http') ? '_blank' : undefined}
-				rel={project.cta.href.startsWith('http') ? 'noreferrer' : undefined}
+				rel={project.cta.href.startsWith('http') ? externalRel : undefined}
 			>
 				{project.cta.label}
 				<svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -59,7 +61,7 @@ const copy = profileContent.projectsPage;
 				<a
 					href={link.href}
 					target={link.external ? '_blank' : undefined}
-					rel={link.external ? 'noreferrer' : undefined}
+					rel={link.external ? externalRel : undefined}
 					class="inline-flex items-center gap-1 text-sm text-slate-300 underline decoration-dotted underline-offset-4 hover:text-primary"
 				>
 					{link.label}
