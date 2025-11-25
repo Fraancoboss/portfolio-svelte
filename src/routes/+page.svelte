@@ -40,13 +40,27 @@
 	const spotlightProjects = content.projects.slice(0, 2);
 	const socialLinks = content.socialLinks;
 	const timeline = content.timeline;
-	// Evitamos tabnabbing cuando abrimos redes en otra pestaña.
-	const externalRel = 'noreferrer noopener';
 </script>
 
 <div class="matrix-frame">
-	<MatrixRain side="left" width={520} offset={360} fillViewportSide centerFadeWidth={320} />
-	<MatrixRain side="right" width={520} offset={360} fillViewportSide centerFadeWidth={320} />
+	<MatrixRain
+		side="left"
+		width={470}
+		offset={530}
+		centerFadeWidth={1}
+		shift={40}
+		bottomFadeHeight={200}
+		maxHeight={3800}
+	/>
+	<MatrixRain
+		side="right"
+		width={470}
+		offset={530}
+		centerFadeWidth={1000}
+		shift={40}
+		bottomFadeHeight={200}
+		maxHeight={3800}
+	/>
 	<section class="grid gap-12 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
 		<div class="space-y-6">
 			{#if home.heroEyebrow}
@@ -172,7 +186,7 @@
 					class="flex items-center justify-between rounded-xl border border-border px-4 py-3 hover:border-primary/60 hover:text-primary"
 					href={social.href}
 					target="_blank"
-					rel={externalRel}
+					rel="noreferrer"
 				>
 					<span>{social.label}</span>
 					<span class="text-xs uppercase tracking-[0.3em] text-slate-500">{social.handle}</span>

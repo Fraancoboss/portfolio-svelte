@@ -16,9 +16,9 @@ const SECURITY_HEADERS: Record<string, string> = {
 	'Referrer-Policy': 'strict-origin-when-cross-origin',
 	// Deshabilitamos APIs sensibles no utilizadas por el portfolio.
 	'Permissions-Policy': 'geolocation=(), microphone=()',
-	// CSP mínima para hosting estático; mantenemos 'unsafe-inline' sólo para los estilos generados por Tailwind.
+	// CSP mínima para hosting estático; añadimos 'unsafe-inline' para los scripts que inyecta SvelteKit y estilos Tailwind.
 	'Content-Security-Policy':
-		"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;",
+		"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com;",
 	// Forzamos HTTPS en subdominios para prevenir downgrades en GitHub Pages.
 	'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
 	// Ubicamos los assets en el mismo origen para evitar que terceros lean recursos caché.

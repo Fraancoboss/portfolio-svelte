@@ -9,6 +9,12 @@
 	export let fillViewportSide = false;
 	// Suaviza la desaparición en el centro para no tapar el contenido.
 	export let centerFadeWidth = 160;
+	// Con shift controlamos una traslación extra para separar la columna del contenido.
+	export let shift = 0;
+	// Altura (px) donde el efecto debe comenzar a desvanecerse antes del final del documento.
+	export let bottomFadeHeight = 240;
+	// Si definimos maxHeight, limitamos la altura total del efecto para no invadir secciones bajas.
+	export let maxHeight: number | null = null;
 
 	let canvas: HTMLCanvasElement | null = null;
 	let ctx: CanvasRenderingContext2D | null = null;
@@ -23,7 +29,11 @@
 	const setupCanvas = () => {
 		if (!canvas) return;
 		const ratio = window.devicePixelRatio || 1;
-		canvasHeight = window.innerHeight;
+		const root = document.documentElement;
+		canvasHeight = Math.max(root.scrollHeight, root.clientHeight, window.innerHeight);
+		if (maxHeight !== null) {
+			canvasHeight = Math.min(canvasHeight, maxHeight);
+		}
 
 		canvasWidth = fillViewportSide ? Math.max(width, Math.round(window.innerWidth / 2) + offset) : width;
 
@@ -53,6 +63,7 @@
 		context.font = `${fontSize}px "Space Mono", "Space Grotesk", monospace`;
 
 		const horizontalFade = Math.min(centerFadeWidth, canvasWidth);
+		const bottomFadeStart = Math.max(canvasHeight - bottomFadeHeight, 0);
 
 		const fadeAlpha = (x: number) => {
 			if (horizontalFade <= 0) return 1;
@@ -69,7 +80,12 @@
 			const x = index * (fontSize - 2);
 			const y = drop * fontSize;
 
-			context.globalAlpha = fadeAlpha(x);
+			let alpha = fadeAlpha(x);
+			if (bottomFadeHeight > 0 && y >= bottomFadeStart) {
+				alpha *= Math.max(0, (canvasHeight - y) / bottomFadeHeight);
+			}
+
+			context.globalAlpha = alpha;
 			context.fillText(text, x, y);
 			context.globalAlpha = 1;
 
@@ -94,10 +110,13 @@
 		setupCanvas();
 		animate();
 		window.addEventListener('resize', handleResize);
+		const observer = new ResizeObserver(handleResize);
+		observer.observe(document.body);
 
 		return () => {
 			if (animationId) cancelAnimationFrame(animationId);
 			window.removeEventListener('resize', handleResize);
+			observer.disconnect();
 		};
 	});
 
@@ -109,7 +128,7 @@
 <canvas
 	bind:this={canvas}
 	class={`matrix-canvas matrix-canvas-${side}`}
-	style={`--matrix-width:${canvasWidth}px; --matrix-offset:${offset}px`}
+	style={`--matrix-width:${canvasWidth}px; --matrix-offset:${offset}px; --matrix-shift:${shift}px`}
 	aria-hidden="true"
 ></canvas>
 
@@ -142,10 +161,10 @@
 	}
 
 	.matrix-canvas-left {
-		left: calc(var(--matrix-offset) * -1);
+		left: calc(var(--matrix-offset) * -1 + var(--matrix-shift));
 	}
 
 	.matrix-canvas-right {
-		right: calc(var(--matrix-offset) * -1);
+		right: calc(var(--matrix-offset) * -1 + var(--matrix-shift));
 	}
 </style>
